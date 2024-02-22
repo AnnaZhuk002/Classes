@@ -122,6 +122,19 @@ enum SUITS: Int, CaseIterable {
     case DIAMONDS
     case HEARTS
     case SPADES
+    
+    static func repr(val: SUITS) -> String {
+        switch val {
+            case .CLUBS:
+                return "♣️"
+            case .DIAMONDS:
+                return "♦️"
+            case .HEARTS:
+                return "♥️"
+            case .SPADES:
+                return "♠️"
+        }
+    }
 }
 
 enum VALUES: Int, CaseIterable {
@@ -138,6 +151,37 @@ enum VALUES: Int, CaseIterable {
     case QUEEN = 12
     case KING = 13
     case ACE = 14
+    
+    static func repr(val: VALUES) -> String {
+        switch val {
+            case .TWO:
+                return "2"
+            case .THREE:
+                return "3"
+            case .FOUR:
+                return "4"
+            case .FIVE:
+                return "5"
+            case .SIX:
+                return "6"
+            case .SEVEN:
+                return "7"
+            case .EIGHT:
+                return "8"
+            case .NINE:
+                return "9"
+            case .TEN:
+                return "10"
+            case .JACK:
+                return "JACK"
+            case .QUEEN:
+                return "QUEEN"
+            case .KING:
+                return "KING"
+            case .ACE:
+                return "ACE"
+        }
+    }
 }
 
 struct Card {
@@ -150,6 +194,11 @@ struct Card {
     init(suit: SUITS, val: VALUES) {
         self.suit = suit
         self.val = val
+    }
+    
+    func repr() -> String {
+        
+        return "Card(\(SUITS.repr(val: self.suit)) \(VALUES.repr(val: self.val))))"
     }
 }
 
@@ -234,13 +283,13 @@ class Poker {
             print("Пара")
         }
         else {
-            print("Ничего")
+            print("Старшая карта: ", comb[0].repr())
         }
     }
     
     func reprOneCombination(cards: [Card]) {
         for card in cards {
-            print(card)
+            print(card.repr())
         }
     }
 }
@@ -319,4 +368,3 @@ print("Random test")
 // Рандомный тест
 let poker: Poker = Poker(numPlayers: 10)
 poker.recognseAll()
-
